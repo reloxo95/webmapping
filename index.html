@@ -1,0 +1,390 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>WEB MAPPING | Aberteo 19</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>WEB MAPPING</h1>
+					<img data-src="images/geolocalizacion.png" style="border: none; box-shadow: none; width: 70%;">
+					<p style="text-align: center; font-size: 0.7em; color: #3498db; font-weight: bold !important;">CHRISTIAN LÓPEZ RODRÍGUEZ</p>
+					<p style="text-align: center; font-size: 0.4em; color: grey;"><a style="color: grey;" href="http://www.aberteo.gal">ABERTEO</a></p>
+				</section>
+				<!-- Presentación -->
+				<section>
+					<br>
+					<h1>¿Quén son?</h1>
+					<p style="font-size: 0.8em;">Enxeñeiro informático</p>
+					<p style="font-size: 0.8em;">Desarrollador Drupal & ML & *JS</p>
+					<p style="font-size: 0.8em;">Co-fundador de <a href="https://galiciacorre.es">galiciacorre</a></p>
+					<p style="font-size: 0.5em;">@christianlrcalo - clopezrodriguez95@gmail.com</p>
+					<img data-src="images/logo_drupal.png" style="border: none; box-shadow: none; width: 35%;">
+					<img data-src="images/logo_python.png" style="margin-left: 50px; border: none; box-shadow: none; width: 10%;">
+					<img data-src="images/logo_vuejs.png" style="margin-left: 50px; border: none; box-shadow: none; width: 10%;">
+					<img data-src="images/logo_galiciacorre.jpg" style="margin-left: 50px; border: none; box-shadow: none; width: 10%;">
+				</section>
+				<!-- Que imos ver -->
+				<section>
+					<br>
+					<h1>Web mapping</h1>
+					<p style="font-size: 0.8em; font-style: italic;">"Representación de obxectos (puntos, áreas) de forma xeolocalizada de maneira que os usuarios poidan sacar conclusións sobre os datos"</p>
+					<div class="fragment fade-up" style="width: 50%; float: left;">
+						<img data-src="images/graficas.png" style="border: none; box-shadow: none; width: 70%;">
+						<p style="font-size: 0.7em; margin-top: -10px;">Gráficas</p>
+					</div>
+					<div class="fragment fade-up" style="width: 49%; float: left;">
+						<img data-src="images/mapas.png" style="border: none; box-shadow: none; width: 65%;">
+						<p style="font-size: 0.7em; margin-top: -10px;">Mapas</p>
+					</div>
+				</section>
+				<!-- Que imos ver / tecnoloxias-->
+				<section>
+					<h1>Web mapping</h1>
+					<img data-src="images/logo_highcharts.jpg" style="border: none; box-shadow: none; width: 30%; margin-right: 30px;">
+					<img data-src="images/logo_openlayers.png" style="border: none; box-shadow: none; width: 15%; margin-right: 30px;">
+					<img data-src="images/logo_googlemaps.png" style="border: none; box-shadow: none; width: 11%;">
+					<br><br>
+					<img data-src="images/logo_leaflet.png" style="border: none; box-shadow: none; width: 20%; padding-right: 20px;">
+					<img data-src="images/logo_mapbox.png" style="border: none; box-shadow: none; width: 22%; padding-right: 20px;">
+					<img data-src="images/logo_carto.png" style="border: none; box-shadow: none; width: 15%;">
+				</section>
+				<!-- Highmaps / inicio -->
+				<section>
+					<img data-src="images/logo_highcharts.jpg" style="border: none; box-shadow: none; width: 90%; margin-top: 13%;">
+				</section>
+				<!-- Highmaps -->
+				<section>
+					<h2 style="margin-top: 5%;">Highmaps</h2>
+					<p style="font-size: 0.8em;">Librería de representación gráfica de mapas</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Sen rutas, carreteras, vista de satélite nin localización</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">OpenSource pero non gratis. Licenza de uso gratuíta só pra proxectos persoais sen beneficio económico</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;"><span style="color: orange;">Visualización </span><span style="color: red;">completamente </span><span style="color: green;">personalizable</span></p>
+					<p class="fragment fade-up fragment fade-up"><a href="https://www.highcharts.com/docs" style="font-size: 0.8em;">Amplia documentación</a></p>
+					<p class="fragment fade-up fragment fade-up"><a href="https://www.highcharts.com/maps/demo" style="font-size: 0.8em;">Gran número de exemplos</a></p>
+				</section>
+				<!-- Highmaps / exemplo -->
+				<section>
+					<h2>Highmaps</h2>
+					<div>
+						<p style="font-size: 0.8em;">Código</p>
+						<pre><code data-trim data-noescape style="font-size: 0.5em;">
+							//Función base
+							Highcharts.data({
+								//Definimos o mapa
+								Highcharts.mapChart('container', {
+									chart: {
+										borderWidth: 1,
+										borderColor: 'lightgray'
+									},
+									title: {
+										text: data_conf.title
+									},
+									mapNavigation: {
+										enabled: true,
+										enableButtons: false
+									},
+									legend: {
+										title: {
+											text: data_conf.legend_title,
+									  },
+										align: 'left',
+										verticalAlign: 'bottom',
+										floating: true,
+										layout: 'vertical',
+										valueDecimals: 0,
+										backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || 'rgba(255, 255, 255, 0.85)',
+									},
+									series: [{
+										data: data,
+										mapData: Highcharts.maps['custom/world'],
+										joinBy: ['iso-a2', 'code'],
+										animation: true,
+										name: 'Carbono Balance',
+										point: {
+											events: {
+												click: pointClick
+											}
+										},
+										tooltip: {
+											headerFormat: '<span style="font-size:15px">{series.name}</span><br/>',
+											pointFormat: '{point.name}: {point.balance:.2f}  ' + data_conf.sufix,
+										},
+										shadow: false
+									}]
+									}
+							});
+						</code></pre>
+					</div>
+				</section>
+				<section>
+					<h2>Highmaps</h2>
+					<div>
+						<p style="font-size: 0.8em;">Resultado</p>
+						<img data-src="images/mapa_highmaps.png" style="border: none; box-shadow: none;">
+					</div>
+					<aside class="notes">
+						<ul>
+							<li>En mapData pode seleccionar a capa de mapa que querias, Highmaps ten moitos</li>
+							<li>Exemplo da documentación do mapa de eleccions do 2016 en EEUU -> https://www.highcharts.com/maps/demo/map-pies</li>
+							<li>Exemplo da documentación do mapa de bandeiras en EEUU -> https://www.highcharts.com/maps/demo/pattern-fill-map</li>
+						</ul>
+					</aside>
+				</section>
+
+
+				<!-- OpenLayers / inicio -->
+				<section>
+					<img data-src="images/logo_openlayers.png" style="border: none; box-shadow: none; width: 50%;">
+				</section>
+				<!-- Openlayers -->
+				<section>
+					<h2 style="margin-top: 5%;">OpenLayers</h2>
+					<p style="font-size: 0.8em;">Xeolocalización de elementos (puntos e áreas) en mapas</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Varias capas (carreteras, relieve, contornos, etc..)</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Sen rutas pero con localización</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">OpenSouce e licenza gratuíta</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Integración con <a href="https://www.drupal.org/project/openlayers">Drupal</a></p>
+					<p class="fragment fade-up fragment fade-up"><a href="http://openlayers.org/en/latest/apidoc/" style="font-size: 0.8em;">Amplia documentación. Moita información pra comezar</a></p>
+				</section>
+				<!-- Openlayers / exemplo -->
+				<section>
+					<h2>OpenLayers</h2>
+					<div style="width: 50%; float: left;">
+						<p style="font-size: 0.8em;">Puntos, área e popup</p>
+						<img data-src="images/mapa_puntos_luz.png" style="border: none; box-shadow: none; width: 100%;">
+					</div>
+					<div style="width: 50%; float: left;">
+						<p style="font-size: 0.8em;">Configuración dende Drupal</p>
+						<img data-src="images/capas_puntos_luz.png" style="border: none; box-shadow: none; width: 90%; margin-top: 70px;">
+					</div>
+					<aside class="notes">
+						<p>Máis exemplos</p>
+						<ul>
+							<li>Comentar que las diferencias entre OpenLayers 2 y 3 (funcionando en 2. testado en 3 pero daba errores)</li>
+							<li>https://www.abeancos.gal/mapa</li>
+							<li>http://www.aculturadaauga.org/mapa</li>
+						</ul>
+					</aside>
+				</section>
+				<!-- Leaflet / inicio -->
+				<section>
+					<img data-src="images/logo_leaflet.png" style="border: none; box-shadow: none; width: 60%; margin-top: 20%;">
+				</section>
+				<!-- Leaflet -->
+				<section>
+					<h2 style="margin-top: 5%;">Leaflet</h2>
+					<p style="font-size: 0.8em;">"Evolución" de OpenLayers en termos de eficiencia</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">OpenSouce e licenza gratuíta</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Máis recente. Menos compoñentes. Fácil de comprender</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Máis lixeiro. Eficiente con gran número de puntos/áreas</p>
+					<p class="fragment fade-up fragment fade-up"><a href="https://leafletjs.com/examples.html" style="font-size: 0.8em;">Boa documentación. Moitos exemplos</a></p>
+				</section>
+				<!-- Leaflet / exemplo -->
+				<section>
+					<h2>Leaflet</h2>
+					<div>
+						<p style="font-size: 0.8em;"></p>
+						<pre><code data-trim data-noescape style="font-size: 0.5em;">
+							//Definimos el mapa
+							var mymap = L.map('mapa_informes_area').setView([datos.coordenadas.latitud, datos.coordenadas.longitud], datos.zoom);
+							L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+									maxZoom: 18,
+									attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+									'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+									'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+									id: 'mapbox.streets'
+							}).addTo(mymap);
+
+							var poligonos = L.geoJSON(datos.poligonos, {
+									style : {
+											"color": datos.color_mouseout,
+											"weight": datos.weight_line
+									}
+							}).addTo(mymap);
+						</code></pre>
+					</div>
+					<aside class="notes">
+						<p>Máis exemplos</p>
+						<ul>
+							<li>Densidad de población EEUU https://leafletjs.com/examples/choropleth/</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Leaflet</h2>
+					<div>
+						<p style="font-size: 0.8em;">Resultado</p>
+						<img data-src="images/dija_leaflet.png" style="border: none; box-shadow: none; width: 70%;">
+					</div>
+				</section>
+
+				<!-- GoogleMaps / inicio -->
+				<section>
+					<img data-src="images/logo_googlemaps.png" style="border: none; box-shadow: none; width: 30%; margin-top: 10%;">
+				</section>
+				<!-- GoogleMaps -->
+				<section>
+					<h2 style="margin-top: 5%;">GoogleMaps</h2>
+					<p style="font-size: 0.8em;">Mundialmente conocido</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Paquete completo (localización, rutas, búsquedas, relación con terceiros, etc...)</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Uso gratuíto pero con límites de acceso</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Diferentes precios para diferences solicitudes e diferentes rangos</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Integración con GoogleCloud para a mostra de gran número de datos</p>
+				</section>
+				<!-- Mapbox / inicio -->
+				<section>
+					<img data-src="images/logo_mapbox.png" style="border: none; box-shadow: none; width: 60%; margin-top: 20%;">
+				</section>
+				<!-- Mapbox -->
+				<section>
+					<h2>Mapbox</h2>
+					<p style="font-size: 0.8em;">"Evolución" de GoogleMaps en termos gráficos</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Mapa con licencia de uso libre con límites de consultas.</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Módulos (direccións, rutas) de pago</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Integración con outras librerías. Leaflet</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Xeración de filtros automáticos a partir datos geoJSON</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;"><span>Visualización </span><span style="color: red;">completamente </span><span style="color: green;">personalizable</span></p>
+					<p class="fragment fade-up" class="fragment fade-up">
+						<a href="https://www.mapbox.com/mapbox-gl-js/api/" style="font-size: 0.8em;">Documentación completa</a>
+					</p>
+				</section>
+				<!-- Mapbox / exemplo -->
+				<section>
+					<h2>Mapbox</h2>
+					<div>
+						<p style="font-size: 0.8em;">Código</p>
+						<pre><code data-trim data-noescape style="font-size: 0.5em;">
+							//Creamos el mapa
+						  var map = new mapboxgl.Map({
+						    container: 'map',
+						    style: 'mapbox://styles/mapbox/streets-v10',
+						    center: [-3.819084, 39.8915675],
+						    zoom: 6
+						  });
+
+						  //Añadimos controles de zoom y movimiento de mapa
+						  map.addControl(new mapboxgl.NavigationControl());
+						  map.addControl(new mapboxgl.FullscreenControl());
+
+						  map.on('load', function (e) {
+						    //Añadimos los datos al mapa
+						    map.addSource("stores", {
+						      "type": "geojson",
+						      "data": stores,
+						    });
+						</code></pre>
+					</div>
+				</section>
+				<section>
+					<h2>Mapbox</h2>
+					<div>
+						<p style="font-size: 0.8em;">Mapa básico</p>
+						<img data-src="images/mapbox_map.png" style="border: none; box-shadow: none; width: 90%;">
+					</div>
+					<aside class="notes">
+						<p>Máis exemplos</p>
+						<ul>
+							<li>Ejemplo de test.mapbox: http://mapbox.test.local/</li>
+							<li>Navegación de mapbox: https://www.mapbox.com/navigation/</li>
+							<li>Movimiento con teclado: https://www.mapbox.com/mapbox-gl-js/example/rotating-controllable-marker/</li>
+							<li>Ruta de avión: https://www.mapbox.com/mapbox-gl-js/example/animate-point-along-route/</li>
+						</ul>
+					</aside>
+				</section>
+				<!-- Carto / inicio -->
+				<section>
+					<img data-src="images/logo_carto.png" style="border: none; box-shadow: none; width: 60%; margin-top: 20%;">
+				</section>
+				<!-- Carto -->
+				<section>
+					<h2>Carto</h2>
+					<p style="font-size: 0.8em;">O "Bugatti" da visualización de mapas</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Xeracións de mapas de forma automática a partir dos datos</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Múltiples formatos. CSV, GEOJSON, KML...</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Evolución temporal</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Perfecto para fardar. Non se poe personalizar</p>
+					<p class="fragment fade-up" class="fragment fade-up">
+						<a href="https://carto.com/demo/siteplanning-demo/" style="font-size: 0.8em;">Disfrutar</a>
+					</p>
+				</section>
+				<section>
+					<h2>Máis ferramentas</h2>
+					<p class="fragment fade-up" class="fragment fade-up">
+						<a href="https://overpass-turbo.eu/" style="font-size: 0.8em;">Over Pass Turbo</a>
+					</p>
+					<p class="fragment fade-up" class="fragment fade-up">
+						<a href="https://www.mapillary.com/" style="font-size: 0.8em;">Mapillary</a>
+					</p>
+					<p class="fragment fade-up" class="fragment fade-up">
+						<a href="https://openstreetcam.org" style="font-size: 0.8em;">OpenStreetCam</a>
+					</p>
+				</section>
+				
+				<!-- Conclusións -->
+				<section>
+					<br>
+					<h2>Tips and Tricks</h2>
+					<p style="font-size: 0.8em;">O final JavaScript manda</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Comenzar é moi sinxelo e divertido</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Facer algo diferente require estudo e moitas probas</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Realizar unha visualización superficial e escoller unha vertiente</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">O uso de geoJSON facilita a representación</p>
+					<p class="fragment fade-up" style="font-size: 0.8em;">Deixar a visualización pra o último momento</p>
+				</section>
+				<!-- FIN -->
+				<section>
+					<h3>Gracias pola atención</h1>
+					<br>
+					<h4 style="color: #3498db;">¿Algunha pregunta?</h4>
+					<img data-src="images/preguntas.png" style="border: none; box-shadow: none; width: 25%;">
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script>
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: false,
+				fragments: true,
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				display: 'block',
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+
+		<!-- Footer -->
+		<div class="share-reveal" style="position: absolute; bottom: 10px; width: 100%; border-top: 1px groove lightgray;">
+			<div style="width: 100%; margin-top: 25px;">
+				<img src="images/logo_aberteo.jpeg" style="width: 3%; margin-left: 50px; float: left; margin-top: -12px;">
+				<h2 style="text-align: center; color: #3498db; font-weight: bolder;">WEB MAPPING - ABERTEO - 20 FEBREIRO 2019</h2>
+			</div>
+
+		</div>
+	</body>
+</html>
